@@ -13,7 +13,7 @@ import Avatar from './lib/component/assets/icons/avatar.svg';
 function App() {
   return (
     <div className="App">
-      <Template1
+      <Template2
         miniSidebar={
           <MiniSidebar>
             <a href="/">
@@ -48,13 +48,13 @@ function App() {
         mainSidebar={
           <MenuList>
             <Menu url="/" content={
-              <a href="/">Dashboard</a>
+              <a href="/">Inquiry</a>
             } />
             <Menu url="/sample-1" content={
-              <a href="/sample-1">Sample 1</a>
+              <a href="/sample-1">Quotation</a>
             } />
             <Menu url="#" content={
-              <a href="#">OKOKO</a>
+              <a href="#">Purchase Order</a>
             }>
               <SubMenu url="/okoko/submenu-1">
                 <a href='/okoko/submenu-1'>
