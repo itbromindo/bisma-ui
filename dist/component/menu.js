@@ -28,7 +28,7 @@ function Menu(props) {
     }
   }, [props.children]);
   return /*#__PURE__*/_react.default.createElement("li", {
-    className: "sidebar-item " + (props.active == 1 ? 'active' : '') + ' ' + hasSubClass
+    className: "sidebar-item " + (props.url == window.location.pathname ? 'active' : '') + ' ' + hasSubClass
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "sidebar-link",
     onClick: _ => {

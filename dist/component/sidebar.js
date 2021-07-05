@@ -1,15 +1,29 @@
 "use strict";
 
+require("core-js/modules/web.dom-collections.iterator.js");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = Sidebar;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function Sidebar(props) {
+  const dropdownStyle = {
+    width: '100%',
+    padding: '10px',
+    outline: 'none',
+    border: '1px solid #518ff4',
+    color: '#25396f',
+    borderRadius: '10px',
+    backgroundColor: '#EAF2FF'
+  };
+
   const sidebarToggleCloseButton = () => {
     return /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
       style: {
@@ -28,6 +42,26 @@ function Sidebar(props) {
     })))))));
   };
 
+  const moduleList = (0, _react.useCallback)(() => {
+    if (props.module.length <= 0) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null);
+    let k = 0,
+        value = "";
+    const currPathname = window.location.pathname;
+
+    for (let i = 0; i < props.module.length; i++) {
+      const el = props.module[i];
+      if (el.url == currPathname) value = el.url;
+    }
+
+    return /*#__PURE__*/_react.default.createElement("select", {
+      style: dropdownStyle,
+      onChange: e => document.location.href = e.target.value,
+      value: value
+    }, props.module.map(i => /*#__PURE__*/_react.default.createElement("option", {
+      key: k++,
+      value: i.url
+    }, i.title)));
+  }, [props.module]);
   return /*#__PURE__*/_react.default.createElement("div", {
     id: "sidebar",
     className: props.sidebarStatus
@@ -42,6 +76,7 @@ function Sidebar(props) {
     }
   }, /*#__PURE__*/_react.default.createElement("tbody", null, /*#__PURE__*/_react.default.createElement("tr", null, /*#__PURE__*/_react.default.createElement("td", {
     style: {
+      zIndex: 1,
       backgroundColor: '#EAF2FF',
       position: 'fixed',
       minHeight: '100vh'
@@ -53,5 +88,16 @@ function Sidebar(props) {
       width: '100%',
       position: 'absolute'
     }
-  }, sidebarToggleCloseButton(), props.mainSidebar)))))));
+  }, sidebarToggleCloseButton(), /*#__PURE__*/_react.default.createElement("ul", {
+    className: "menu"
+  }, /*#__PURE__*/_react.default.createElement("li", {
+    className: "sidebar-title"
+  }, "Modul Bisma"), /*#__PURE__*/_react.default.createElement("li", {
+    className: "sidebar-item",
+    style: {
+      borderBottom: '1px solid #D4D4D4',
+      paddingBottom: '10px',
+      marginBottom: '10px'
+    }
+  }, moduleList()), props.mainSidebar))))))));
 }

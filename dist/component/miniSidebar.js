@@ -11,8 +11,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function MiniSidebar(props) {
   return /*#__PURE__*/_react.default.createElement("div", {
-    style: {
-      width: '65px'
-    }
+    className: "mini-sidebar"
   }, props.children);
 }

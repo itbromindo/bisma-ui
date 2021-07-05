@@ -42,6 +42,7 @@ function Template(props) {
   const updateSidebarStatus = val => setSidebarStatus(val);
 
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_sidebar.default, {
+    module: props.module,
     sidebarStatus: sidebarStatus,
     updateSidebarStatus: updateSidebarStatus,
     miniSidebar: props.miniSidebar,

@@ -11,6 +11,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function SubMenu(props) {
   return /*#__PURE__*/_react.default.createElement("li", {
-    className: "submenu-item active"
+    className: "submenu-item " + (props.url == window.location.pathname ? "active" : "")
   }, props.children);
 }
