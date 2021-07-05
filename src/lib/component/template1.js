@@ -1,7 +1,7 @@
-import Sidebar from './sidebar';
+import Sidebar1 from './sidebar1';
 import React, { useEffect, useState } from 'react';
 
-export default function Template(props) {
+export default function Template1(props) {
 
     const [sidebarStatus, setSidebarStatus] = useState('active');
 
@@ -27,7 +27,8 @@ export default function Template(props) {
 
     return (
         <div>
-            <Sidebar 
+            <Sidebar1 
+                profile={props.profile}
                 module={props.module}
                 sidebarStatus={sidebarStatus} 
                 updateSidebarStatus={updateSidebarStatus} 

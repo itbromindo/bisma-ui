@@ -1,6 +1,12 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
-export default function Sidebar(props) {
+export default function Sidebar1(props) {
+
+    const [currPathname, setCurrPathname] = useState();
+
+    useEffect(() => {
+        setCurrPathname(window.location.pathname);
+    }, [])
 
     const dropdownStyle = {
         width: '100%',
@@ -30,27 +36,30 @@ export default function Sidebar(props) {
     }
 
     const moduleList = useCallback(() => {
-        if (props.module.length <= 0) return <></>;
+        if (!props.module || props.module.length <= 0) return <></>;
         
-        let k = 0,
-            value = "";
-        
-        const currPathname = window.location.pathname;
-        for (let i = 0; i < props.module.length; i++) {
-            const el = props.module[i];
-            if (el.url == currPathname) value = el.url;
-        }
-
-        return <select style={dropdownStyle} onChange={(e) => document.location.href = e.target.value} value={value}>
-            {
-                props.module.map(
-                    (i) => <option key={k++} value={i.url}>
-                        {i.title}
-                    </option>
-                )
+        if (typeof window !== "undefined") {
+            let k = 0,
+                value = props.module[0];
+            
+            for (let i = 0; i < props.module.length; i++) {
+                const el = props.module[i];
+                if (el.url == currPathname) value = el.url;
             }
-        </select>;
-    }, [props.module])
+
+            return <select style={dropdownStyle} onChange={(e) => document.location.href = e.target.value} value={value}>
+                {
+                    props.module.map(
+                        (i) => <option key={k++} value={i.url}>
+                            {i.title}
+                        </option>
+                    )
+                }
+            </select>;
+        }
+        
+        return <select style={dropdownStyle}></select>;
+    }, [props.module, currPathname])
 
     return (
         <div id="sidebar" className={props.sidebarStatus}>
@@ -61,6 +70,9 @@ export default function Sidebar(props) {
                             <tr>
                                 <td style={{ zIndex: 1,backgroundColor: '#EAF2FF', position: 'fixed', minHeight: '100vh' }}>
                                     {props.miniSidebar}
+                                    <div className="mini-sidebar" style={{ position: 'fixed', bottom: '0px', padding: '0px 5px 20px 5px' }}>
+                                        {props.profile}
+                                    </div>
                                 </td>
                                 <td style={{ paddingLeft: '65px', top: '0px', width: '100%', position: 'absolute' }}>
                                     {sidebarToggleCloseButton()}

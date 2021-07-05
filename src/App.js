@@ -1,17 +1,19 @@
 import Menu from './lib/component/menu';
 import MenuList from './lib/component/menuList';
 import SubMenu from './lib/component/submenu';
-import Template from './lib/component/template';
+import Template1 from './lib/component/template1';
+import Template2 from './lib/component/template2';
 import MiniSidebar from './lib/component/miniSidebar';
 
 import Dashboard from './lib/component/assets/icons/dashboard.svg';
 import Notification from './lib/component/assets/icons/notification.svg';
 import SomeIcon from './lib/component/assets/icons/some-icon.svg';
+import Avatar from './lib/component/assets/icons/avatar.svg';
 
 function App() {
   return (
     <div className="App">
-      <Template
+      <Template1
         miniSidebar={
           <MiniSidebar>
             <a href="/">
@@ -24,6 +26,12 @@ function App() {
               <img src={SomeIcon} alt="" width="45px" style={{ margin: '10px' }} />
             </a>
           </MiniSidebar>
+        }
+
+        profile={
+          <a href="/some-icon">
+              <img src={Avatar} alt="avatar" />
+          </a>
         }
 
         module={[

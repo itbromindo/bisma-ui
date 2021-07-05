@@ -1,11 +1,11 @@
 "use strict";
 
-require("core-js/modules/web.dom-collections.iterator.js");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = Sidebar;
+
+require("core-js/modules/web.dom-collections.iterator.js");
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -14,6 +14,10 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function Sidebar(props) {
+  const [currPathname, setCurrPathname] = (0, _react.useState)();
+  (0, _react.useEffect)(() => {
+    setCurrPathname(window.location.pathname);
+  }, []);
   const dropdownStyle = {
     width: '100%',
     padding: '10px',
@@ -44,24 +48,30 @@ function Sidebar(props) {
 
   const moduleList = (0, _react.useCallback)(() => {
     if (props.module.length <= 0) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null);
-    let k = 0,
-        value = "";
-    const currPathname = window.location.pathname;
 
-    for (let i = 0; i < props.module.length; i++) {
-      const el = props.module[i];
-      if (el.url == currPathname) value = el.url;
+    if (typeof window !== "undefined") {
+      let k = 0,
+          value = "";
+
+      for (let i = 0; i < props.module.length; i++) {
+        const el = props.module[i];
+        if (el.url == currPathname) value = el.url;
+      }
+
+      return /*#__PURE__*/_react.default.createElement("select", {
+        style: dropdownStyle,
+        onChange: e => document.location.href = e.target.value,
+        value: value
+      }, props.module.map(i => /*#__PURE__*/_react.default.createElement("option", {
+        key: k++,
+        value: i.url
+      }, i.title)));
     }
 
     return /*#__PURE__*/_react.default.createElement("select", {
-      style: dropdownStyle,
-      onChange: e => document.location.href = e.target.value,
-      value: value
-    }, props.module.map(i => /*#__PURE__*/_react.default.createElement("option", {
-      key: k++,
-      value: i.url
-    }, i.title)));
-  }, [props.module]);
+      style: dropdownStyle
+    });
+  }, [props.module, currPathname]);
   return /*#__PURE__*/_react.default.createElement("div", {
     id: "sidebar",
     className: props.sidebarStatus

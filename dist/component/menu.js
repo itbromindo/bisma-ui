@@ -19,6 +19,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function Menu(props) {
   const [hasSubClass, setHasSubClass] = (0, _react.useState)('');
+  const [currPathname, setCurrPathname] = (0, _react.useState)();
   const [childrenVisibility, setChildrenVisibility] = (0, _react.useState)(false);
   (0, _react.useEffect)(() => {
     console.log('props.children', props.children);
@@ -26,9 +27,11 @@ function Menu(props) {
     if (props.children !== undefined) {
       setHasSubClass('has-sub');
     }
+
+    setCurrPathname(window.location.pathname);
   }, [props.children]);
   return /*#__PURE__*/_react.default.createElement("li", {
-    className: "sidebar-item " + (props.url == window.location.pathname ? 'active' : '') + ' ' + hasSubClass
+    className: "sidebar-item " + (props.url == currPathname ? 'active' : '') + ' ' + hasSubClass
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "sidebar-link",
     onClick: _ => {
