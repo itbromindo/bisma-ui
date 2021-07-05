@@ -27,7 +27,7 @@ Object.defineProperty(exports, "MiniSidebar", {
     return _miniSidebar.default;
   }
 });
-Object.defineProperty(exports, "Template", {
+Object.defineProperty(exports, "Template1", {
   enumerable: true,
   get: function get() {
     return _template.default;
@@ -42,6 +42,6 @@ var _submenu = _interopRequireDefault(require("./component/submenu"));
 
 var _miniSidebar = _interopRequireDefault(require("./component/miniSidebar"));
 
-var _template = _interopRequireDefault(require("./component/template"));
+var _template = _interopRequireDefault(require("./component/template1"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

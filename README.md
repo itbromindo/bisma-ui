@@ -14,7 +14,11 @@ Bisma-ui tersedia di npm dan dapat di install dengan perintah command line. Beri
 # Penggunaan
 Sebelum ke implementasi kode, dibawah adalah gambar building block yang membangun bisma-ui menjadi satu kesatuan. 
 
-![Bisma-UI building block](https://raw.githubusercontent.com/itbromindo/bisma-ui/main/docs/bisma-ui-building-block.png)
+## Layout 1 (`<Template1/>`)
+![Bisma-UI building block - Template 1](https://github.com/itbromindo/bisma-ui/blob/main/docs/template1.png?raw=true)
+
+## Layout 2 (`<Template2/>`)
+![Bisma-UI building block - Template 2](https://github.com/itbromindo/bisma-ui/blob/main/docs/template2.png?raw=true)
 
 Buidling block bisma-ui erdiri dari :
 1. Mini sidebar. Contoh kode :
@@ -111,7 +115,7 @@ Buidling block bisma-ui erdiri dari :
 
 Contoh full kode :
 ```sh
-import { Template, Menu, MenuList, SubMenu, MiniSidebar } from 'bisma-ui'
+import { Template1, Menu, MenuList, SubMenu, MiniSidebar } from 'bisma-ui'
 
 import Dashboard from './lib/component/assets/icons/dashboard.svg';
 import Notification from './lib/component/assets/icons/notification.svg';
@@ -120,7 +124,7 @@ import SomeIcon from './lib/component/assets/icons/some-icon.svg';
 function App() {
   return (
     <div className="App">
-      <Template
+      <Template1
         miniSidebar={
           <MiniSidebar>
             <a href="/">
@@ -216,15 +220,25 @@ export default App;
 
 # API
 
-## Template
-Wrapper / pembungkus utama dari UI
+## Template1
+Wrapper / pembungkus utama dari UI yang menggunakan layout pertama
 
 | Property  | Deskripsi  | Tipe  | Default  |
 | ------------ | ------------ | ------------ | ------------ |
 | miniSidebar  | Element UI yang akan mengisi mini sidebar  | `<MiniSidebar>`  | -  |
 | mainSidebar | Element UI yang akan mengisi main sidebar  | `<MenuList>`  | -  |
+| profile | Element UI yang akan mengisi profil  | `HTML/JSX`  | -  |
 | module | Element UI yang akan mengisi main module  | `JSON`  | -  |
 | content | Element UI yang akan mengisi main content  | `HTML/JSX`  | -  |
+
+## Template2
+Wrapper / pembungkus utama dari UI yang menggunakan layout kedua
+
+| Property  | Deskripsi  | Tipe  | Default  |
+| ------------ | ------------ | ------------ | ------------ |
+| miniSidebar  | Element UI yang akan mengisi mini sidebar  | `<MiniSidebar>`  | -  |
+| content | Element UI yang akan mengisi main content  | `HTML/JSX`  | -  |
+| profile | Element UI yang akan mengisi profil  | `HTML/JSX`  | -  |
 
 ## MenuList
 Digunakan untuk membungkus `<Menu>` dan `<Submenu>`

@@ -22,14 +22,25 @@ function Menu(props) {
   const [currPathname, setCurrPathname] = (0, _react.useState)();
   const [childrenVisibility, setChildrenVisibility] = (0, _react.useState)(false);
   (0, _react.useEffect)(() => {
-    console.log('props.children', props.children);
+    console.log('props.children menu', props.children);
 
     if (props.children !== undefined) {
       setHasSubClass('has-sub');
+      checkIfChildrenIsActive();
     }
 
     setCurrPathname(window.location.pathname);
   }, [props.children]);
+
+  const checkIfChildrenIsActive = () => {
+    for (let i = 0; i < props.children.length; i++) {
+      const el = props.children[i];
+      const url = el.props.url;
+      const isActive = url == window.location.pathname;
+      if (isActive) setChildrenVisibility(true);
+    }
+  };
+
   return /*#__PURE__*/_react.default.createElement("li", {
     className: "sidebar-item " + (props.url == currPathname ? 'active' : '') + ' ' + hasSubClass
   }, /*#__PURE__*/_react.default.createElement("div", {

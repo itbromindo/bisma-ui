@@ -3,11 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = Template;
+exports.default = Template1;
 
 require("core-js/modules/web.dom-collections.iterator.js");
 
-var _sidebar = _interopRequireDefault(require("./sidebar"));
+var _sidebar = _interopRequireDefault(require("./sidebar2"));
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -17,7 +17,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Template(props) {
+function Template1(props) {
   const [sidebarStatus, setSidebarStatus] = (0, _react.useState)('active');
   (0, _react.useEffect)(() => {
     var w = window.innerWidth;
@@ -42,6 +42,7 @@ function Template(props) {
   const updateSidebarStatus = val => setSidebarStatus(val);
 
   return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_sidebar.default, {
+    profile: props.profile,
     module: props.module,
     sidebarStatus: sidebarStatus,
     updateSidebarStatus: updateSidebarStatus,
@@ -49,7 +50,10 @@ function Template(props) {
     mainSidebar: props.mainSidebar
   }), /*#__PURE__*/_react.default.createElement("div", {
     id: "main",
-    className: "layout-navbar"
+    className: "layout-navbar",
+    style: {
+      marginLeft: sidebarStatus === 'active' ? '70px' : '0px'
+    }
   }, /*#__PURE__*/_react.default.createElement("header", {
     className: "mb-3"
   }, /*#__PURE__*/_react.default.createElement("nav", {

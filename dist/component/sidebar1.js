@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = Sidebar;
+exports.default = Sidebar1;
 
 require("core-js/modules/web.dom-collections.iterator.js");
 
@@ -13,7 +13,7 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function Sidebar(props) {
+function Sidebar1(props) {
   const [currPathname, setCurrPathname] = (0, _react.useState)();
   (0, _react.useEffect)(() => {
     setCurrPathname(window.location.pathname);
@@ -47,11 +47,11 @@ function Sidebar(props) {
   };
 
   const moduleList = (0, _react.useCallback)(() => {
-    if (props.module.length <= 0) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null);
+    if (!props.module || props.module.length <= 0) return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null);
 
     if (typeof window !== "undefined") {
       let k = 0,
-          value = "";
+          value = props.module[0];
 
       for (let i = 0; i < props.module.length; i++) {
         const el = props.module[i];
@@ -91,7 +91,14 @@ function Sidebar(props) {
       position: 'fixed',
       minHeight: '100vh'
     }
-  }, props.miniSidebar), /*#__PURE__*/_react.default.createElement("td", {
+  }, props.miniSidebar, /*#__PURE__*/_react.default.createElement("div", {
+    className: "mini-sidebar",
+    style: {
+      position: 'fixed',
+      bottom: '0px',
+      padding: '0px 5px 20px 5px'
+    }
+  }, props.profile)), /*#__PURE__*/_react.default.createElement("td", {
     style: {
       paddingLeft: '65px',
       top: '0px',
