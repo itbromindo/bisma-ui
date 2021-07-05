@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Link } from "react-router-dom";
 import SubMenuList from './submenuList';
 
 export default function Menu(props) {
@@ -8,27 +7,26 @@ export default function Menu(props) {
     const [childrenVisibility, setChildrenVisibility] = useState(false);
 
     useEffect(() => {
+        console.log('props.children', props.children);
         if (props.children !== undefined) {
             setHasSubClass('has-sub');
         }
     }, [props.children])
 
     return (
-        <BrowserRouter>
-            <li className={"sidebar-item " + (props.active == 1 ? 'active' : '') + ' ' + hasSubClass} >
-                <Link to={props.to} className="sidebar-link" onClick={(_) => {
-                    setChildrenVisibility(!childrenVisibility);
-                }}>
-                    <span>{props.title}</span>
-                </Link>
-                {
-                    props.children !== undefined
-                        ? <SubMenuList active={childrenVisibility ? 1 : 0} >
-                        {props.children}
-                    </SubMenuList>
-                    : ''
-                }
-            </li>
-        </BrowserRouter>
+        <li className={"sidebar-item " + (props.url == window.location.pathname ? 'active' : '') + ' ' + hasSubClass} >
+            <div className="sidebar-link" onClick={(_) => {
+                setChildrenVisibility(!childrenVisibility);
+            }} style={{ cursor:'pointer' }}>
+                {props.content}
+            </div>
+            {
+                props.children !== undefined
+                    ? <SubMenuList active={childrenVisibility ? 1 : 0} >
+                    {props.children}
+                </SubMenuList>
+                : ''
+            }
+        </li>
     )
 }
