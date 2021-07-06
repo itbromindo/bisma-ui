@@ -76,7 +76,16 @@ Buidling block bisma-ui erdiri dari :
 ]
 ```
 
-4. Content. Contoh kode :
+4. Profile. Contoh kode :
+```sh
+profile={
+    <a href="/some-icon">
+        <img src={'./assets/icons/avatar.svg'} alt="avatar" />
+    </a>
+}
+```
+
+5. Content. Contoh kode :
 ```sh
 <div className="page-heading">
     <div className="page-title">
@@ -149,6 +158,12 @@ function App() {
             url: "/pengadaan"
           }
         ]}
+
+        profile={
+            <a href="/some-icon">
+                <img src={'./assets/icons/avatar.svg'} alt="avatar" />
+            </a>
+        }
 
         mainSidebar={
           <MenuList>
