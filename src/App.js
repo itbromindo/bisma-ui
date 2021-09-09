@@ -9,11 +9,14 @@ import Dashboard from './lib/component/assets/icons/dashboard.svg';
 import Notification from './lib/component/assets/icons/notification.svg';
 import SomeIcon from './lib/component/assets/icons/some-icon.svg';
 import Avatar from './lib/component/assets/icons/avatar.svg';
+import MentionBox from './lib/component/textinput';
+
+import mentions from "./lib/component/assets/js/mentions"
 
 function App() {
   return (
     <div className="App">
-      <Template2
+      <Template1
         miniSidebar={
           <MiniSidebar>
             <a href="/">
@@ -95,11 +98,12 @@ function App() {
                   <h4 className="card-title">Example Content</h4>
                 </div>
                 <div className="card-body">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quas omnis
-                  laudantium tempore
-                  exercitationem, expedita aspernatur sed officia asperiores unde tempora maxime odio
-                  reprehenderit
-                  distinctio incidunt! Vel aspernatur dicta consequatur!
+                  <MentionBox 
+                    data={mentions}
+                    onChange={(raw, mentionedUser) => {
+                      console.log('raw, mentionedUser', raw, mentionedUser)
+                    }}
+                  />
                 </div>
               </div>
             </section>
