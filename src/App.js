@@ -9,7 +9,7 @@ import Dashboard from './lib/component/assets/icons/dashboard.svg';
 import Notification from './lib/component/assets/icons/notification.svg';
 import SomeIcon from './lib/component/assets/icons/some-icon.svg';
 import Avatar from './lib/component/assets/icons/avatar.svg';
-import MentionBox from './lib/component/textinput';
+import MentionBox from './lib/component/mentionbox';
 
 import mentions from "./lib/component/assets/js/mentions"
 
