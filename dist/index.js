@@ -39,6 +39,12 @@ Object.defineProperty(exports, "Template2", {
     return _template2.default;
   }
 });
+Object.defineProperty(exports, "MentionBox", {
+  enumerable: true,
+  get: function get() {
+    return _mentionbox.default;
+  }
+});
 
 var _menu = _interopRequireDefault(require("./component/menu"));
 
@@ -51,5 +57,7 @@ var _miniSidebar = _interopRequireDefault(require("./component/miniSidebar"));
 var _template = _interopRequireDefault(require("./component/template1"));
 
 var _template2 = _interopRequireDefault(require("./component/template2"));
+
+var _mentionbox = _interopRequireDefault(require("./component/mentionbox"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

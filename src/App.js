@@ -9,11 +9,40 @@ import Dashboard from './lib/component/assets/icons/dashboard.svg';
 import Notification from './lib/component/assets/icons/notification.svg';
 import SomeIcon from './lib/component/assets/icons/some-icon.svg';
 import Avatar from './lib/component/assets/icons/avatar.svg';
-import MentionBox from './lib/component/mentionbox';
 
+import MentionBox from './lib/component/mentionBox';
+import MentionContent from './lib/component/mentionContent';
 import mentions from "./lib/component/assets/js/mentions"
+import { useState } from 'react';
+import MentionText from './lib/component/mentionText';
 
 function App() {
+
+  const [message, setMessage] = useState(MentionText())
+  const [messageList, setMessageList] = useState([])
+
+  const onMentionBoxChangeHandler = (editorState, mentionedUsers) => {
+    setMessage(editorState)
+  }
+
+  const sendMessageHandler = () => {
+    const msgList = [...messageList, message]
+    setMessageList(msgList)
+    setMessage(MentionText())
+  }
+
+  const messageListUI = () => {
+    let msgListUI = []
+    for (let i = 0; i < messageList.length; i++) {
+      const el = messageList[i];
+      msgListUI.push(
+        <MentionContent key={i} content={el} />
+      )
+    }
+
+    return msgListUI
+  }
+
   return (
     <div className="App">
       <Template1
@@ -98,12 +127,14 @@ function App() {
                   <h4 className="card-title">Example Content</h4>
                 </div>
                 <div className="card-body">
+                  { messageListUI() }
+                  
                   <MentionBox 
-                    data={mentions}
-                    onChange={(raw, mentionedUser) => {
-                      console.log('raw, mentionedUser', raw, mentionedUser)
-                    }}
+                    value={message}
+                    suggestionData={mentions}
+                    onChange={(editorState, mentionedUsers) => onMentionBoxChangeHandler(editorState, mentionedUsers)}
                   />
+                  <button onClick={sendMessageHandler}>Send</button>
                 </div>
               </div>
             </section>

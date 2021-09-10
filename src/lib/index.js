@@ -4,7 +4,7 @@ import SubMenu from './component/submenu';
 import MiniSidebar from './component/miniSidebar';
 import Template1 from "./component/template1";
 import Template2 from "./component/template2";
-import MentionBox from './component/mentionbox';
+import MentionBox from './component/mentionBox';
 
 export {
     Template1,

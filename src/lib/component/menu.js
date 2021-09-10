@@ -8,7 +8,7 @@ export default function Menu(props) {
     const [childrenVisibility, setChildrenVisibility] = useState(false);
 
     useEffect(() => {
-        console.log('props.children menu', props.children);
+        // console.log('props.children menu', props.children);
         if (props.children !== undefined) {
             setHasSubClass('has-sub');
 
