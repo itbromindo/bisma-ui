@@ -1,3 +1,5 @@
+
+
 # Background
 Motivasi pengembangan bisma-ui dilakukan untuk mempercepat pengembangan UI serta memudahkan koordinasi antar developer baik dari internal developer maupun eksternal. Template bisma-ui dibuat menggunakan [Mazer](https://github.com/zuramai/mazer) yang dimodifikasi sedemikian rupa agar sesuai dengan desain UI bisma.
 
@@ -11,22 +13,97 @@ Bisma-ui tersedia di npm dan dapat di install dengan perintah command line. Beri
 
 3. Installasi sudah selesai.
 
-# Updates
-## MentionBox (`<MentionBox/>`)
-![Bisma-UI mentionbox](https://raw.githubusercontent.com/itbromindo/bisma-ui/main/docs/mentionbox.png)
-MentionBox mendukung bidang input untuk melakukan mention ke user lain
+# Dokumentasi
+1. [Building Block UI](#building-block)
+2. [Komponen UI](#komponen-ui)
+	a. [Layout](#layout)
+		- [Template1](#template1)
+		- [Template2](#template2)
+	b. [UI Blocks](#ui-blocks)
+		- [MiniSidebar](#mini-sidebar)
+		- [MainSidebar](#main-sidebar)
+		- [Module data props](#module)
+		- [Profile](#profile)
+		- [Content](#content)
+	c. [Full example](#full-code-example)
+3. [Mention](#mention)
+	a. [MentionBox](#mentionbox)
+	b. [MentionContent](#mentioncontent)
+	c. [MentionText](#mentiontext)
+4. [Component API](#api)
+	
 
-# Penggunaan
+# Building Block
 Sebelum ke implementasi kode, dibawah adalah gambar building block yang membangun bisma-ui menjadi satu kesatuan. 
 
-## Layout 1 (`<Template1/>`)
+### Layout 1 (`<Template1/>`)
 ![Bisma-UI building block - Template 1](https://github.com/itbromindo/bisma-ui/blob/main/docs/template1.png?raw=true)
 
-## Layout 2 (`<Template2/>`)
+### Layout 2 (`<Template2/>`)
 ![Bisma-UI building block - Template 2](https://github.com/itbromindo/bisma-ui/blob/main/docs/template2.png?raw=true)
 
-Buidling block bisma-ui erdiri dari :
-1. Mini sidebar. Contoh kode :
+# Komponen UI
+
+## Layout
+### Template1
+```sh
+<Template1
+  miniSidebar={
+    <MiniSidebar></MiniSidebar>
+  }
+
+  profile={
+    <a href="/some-icon">
+        <img src={Avatar} alt="avatar" />
+    </a>
+  }
+
+  module={[
+    {
+      title: "Penjualan",
+      url: "/sales"
+    }
+  ]}
+
+  mainSidebar={
+    <MenuList></MenuList>
+  }
+
+  content={
+    <div className="page-heading"></div>
+  }
+/>
+```
+### Template2
+```sh
+<Template1
+  miniSidebar={
+    <MiniSidebar></MiniSidebar>
+  }
+
+  profile={
+    <a href="/some-icon">
+        <img src={Avatar} alt="avatar" />
+    </a>
+  }
+
+  module={[
+    {
+      title: "Penjualan",
+      url: "/sales"
+    }
+  ]}
+
+  content={
+    <div className="page-heading"></div>
+  }
+/>
+```
+
+## UI Blocks
+Buidling block bisma-ui terdiri dari :
+### Mini sidebar
+Contoh kode :
 ```sh
 <MiniSidebar>
     <a href="/">
@@ -41,7 +118,8 @@ Buidling block bisma-ui erdiri dari :
 </MiniSidebar>
 ```
 
-2. Main sidebar. Contoh kode :
+### Main sidebar
+Contoh kode :
 ```sh
 <MenuList>
     <Menu url="/" content={
@@ -67,7 +145,8 @@ Buidling block bisma-ui erdiri dari :
 </MenuList>
 ```
 
-3. Module. Contoh kode :
+### Module
+Contoh kode :
 ```sh
 [
     {
@@ -81,7 +160,8 @@ Buidling block bisma-ui erdiri dari :
 ]
 ```
 
-4. Profile. Contoh kode :
+### Profile
+Contoh kode :
 ```sh
 profile={
     <a href="/some-icon">
@@ -90,7 +170,8 @@ profile={
 }
 ```
 
-5. Content. Contoh kode :
+### Content
+Contoh kode :
 ```sh
 <div className="page-heading">
     <div className="page-title">
@@ -127,7 +208,7 @@ profile={
 </div>
 ```
 
-Contoh full kode :
+### Full code example
 ```sh
 import { Template1, Menu, MenuList, SubMenu, MiniSidebar } from 'bisma-ui'
 
@@ -295,6 +376,37 @@ Implementasi kode MentionBox dengan data diatas :
 />
 ```
 
+## Mention
+![Bisma-UI mentionbox](https://raw.githubusercontent.com/itbromindo/bisma-ui/main/docs/mentionbox.png)
+Mention merupakan fitur baru yang mendukung bidang input untuk melakukan mention ke user lain. 
+### MentionBox
+MentionBox adalah komponen input. Pada HTML regular, MentionBox dapat dikatakan sejenis tag `<input>`. Contoh :
+```
+<MentionBox
+	value={message}
+	suggestionData={mentions}
+	onChange={(editorState, mentionedUsers) => onMentionBoxChangeHandler(editorState, mentionedUsers)}
+/>
+```
+### MentionContent
+MentionContent berfungsi untuk menampilkan text yang di input melalui MentionBox.
+```
+let  msgListUI = []
+for (let  i = 0; i < messageList.length; i++) {
+	const  el = messageList[i];
+	msgListUI.push(
+		<MentionContent  key={i}  content={el}  />
+	)
+}
+
+return  msgListUI
+```
+### MentionText
+MentionText merupakan tipe data yang dihasilkan dari setiap pengisian MentionBox. Dalam skenario umum MentionText digunakan di state bersama MentionContent digunakan untuk menampilkan text hasil input di MentionBox.
+```
+const [message, setMessage] = useState(MentionText())
+```
+
 # API
 
 ## Template1
@@ -353,5 +465,16 @@ Komponen untuk bidang input yang membutuhkan mention user lain
 
 | Property  | Deskripsi  | Tipe  | Default  |
 | ------------ | ------------ | ------------ | ------------ |
-| data  | Daftar user yang digunakan sebagai sumber data untuk di filter ketika mention user  | `Array`  | -  |
+| value  | Value pada input MentionBox  | `MentionText`  | -  |
+| suggestionData  | Daftar user yang digunakan sebagai sumber data untuk di filter ketika mention user  | `Array`  | -  |
 | onChange | Handle perubahan bidang input yang memiliki parameter raw data dan user yang di mention  | `Function(raw, mentionedUser)`  | -  |
+
+## MentionContent
+Wrapper / pembungkus mini sidebar dalam UI
+
+| Property  | Deskripsi  | Tipe  | Default  |
+| ------------ | ------------ | ------------ | ------------ |
+| content | Berisi data yang bersumber dari MentionBox akan ditampilkan | `MentionText`  | -  |
+
+## MentionText
+Tidak memiliki property

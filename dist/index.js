@@ -42,7 +42,7 @@ Object.defineProperty(exports, "Template2", {
 Object.defineProperty(exports, "MentionBox", {
   enumerable: true,
   get: function get() {
-    return _mentionbox.default;
+    return _mentionBox.default;
   }
 });
 
@@ -58,6 +58,6 @@ var _template = _interopRequireDefault(require("./component/template1"));
 
 var _template2 = _interopRequireDefault(require("./component/template2"));
 
-var _mentionbox = _interopRequireDefault(require("./component/mentionbox"));
+var _mentionBox = _interopRequireDefault(require("./component/mentionBox"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }

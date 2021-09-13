@@ -22,8 +22,7 @@ function Menu(props) {
   const [currPathname, setCurrPathname] = (0, _react.useState)();
   const [childrenVisibility, setChildrenVisibility] = (0, _react.useState)(false);
   (0, _react.useEffect)(() => {
-    console.log('props.children menu', props.children);
-
+    // console.log('props.children menu', props.children);
     if (props.children !== undefined) {
       setHasSubClass('has-sub');
       checkIfChildrenIsActive();

@@ -19,6 +19,8 @@ var _editorStylesModule = _interopRequireDefault(require("./assets/css/editorSty
 
 require("draft-js-mention-plugin/lib/plugin.css");
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -32,19 +34,14 @@ class MentionBox extends _react.Component {
     super(props);
 
     _defineProperty(this, "state", {
-      editorState: _draftJs.EditorState.createEmpty(),
-      suggestions: this.props.data
+      reset: false,
+      editorState: this.props.value,
+      suggestions: this.props.suggestionData
     });
 
     _defineProperty(this, "onChange", editorState => {
-      this.setState({
-        editorState
-      });
-      setTimeout(() => {
-        const raw = this.extractData();
-        const mentionedUsers = this.extractMentions();
-        this.props.onChange(raw, mentionedUsers);
-      }, 500);
+      const mentionedUsers = this.extractMentions();
+      this.props.onChange(editorState, mentionedUsers);
     });
 
     _defineProperty(this, "onSearchChange", _ref => {
@@ -52,18 +49,12 @@ class MentionBox extends _react.Component {
         value
       } = _ref;
       this.setState({
-        suggestions: (0, _draftJsMentionPlugin.defaultSuggestionsFilter)(value, this.props.data)
+        suggestions: (0, _draftJsMentionPlugin.defaultSuggestionsFilter)(value, this.props.suggestionData)
       });
     });
 
-    _defineProperty(this, "extractData", () => {
-      const contentState = this.state.editorState.getCurrentContent();
-      const raw = (0, _draftJs.convertToRaw)(contentState);
-      return raw;
-    });
-
     _defineProperty(this, "extractMentions", () => {
-      const contentState = this.state.editorState.getCurrentContent();
+      const contentState = this.props.value.getCurrentContent();
       const raw = (0, _draftJs.convertToRaw)(contentState);
       let mentionedUsers = [];
 
@@ -74,8 +65,6 @@ class MentionBox extends _react.Component {
 
       return mentionedUsers;
     });
-
-    _defineProperty(this, "q", void 0);
 
     this.mentionPlugin = (0, _draftJsMentionPlugin.default)();
   }
@@ -89,7 +78,7 @@ class MentionBox extends _react.Component {
       className: _editorStylesModule.default.editor
     }, /*#__PURE__*/_react.default.createElement(_draftJsPluginsEditor.default, {
       plugins: plugins,
-      editorState: this.state.editorState,
+      editorState: this.props.value,
       onChange: this.onChange
     }), /*#__PURE__*/_react.default.createElement(MentionSuggestions, {
       onSearchChange: this.onSearchChange,
@@ -101,3 +90,8 @@ class MentionBox extends _react.Component {
 
 var _default = MentionBox;
 exports.default = _default;
+MentionBox.propTypes = {
+  suggestionData: _propTypes.default.any.isRequired,
+  onChange: _propTypes.default.func.isRequired,
+  value: _propTypes.default.any.isRequired
+};
