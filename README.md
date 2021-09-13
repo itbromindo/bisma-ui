@@ -16,20 +16,35 @@ Bisma-ui tersedia di npm dan dapat di install dengan perintah command line. Beri
 # Dokumentasi
 1. [Building Block UI](#building-block)
 2. [Komponen UI](#komponen-ui)
+	
 	a. [Layout](#layout)
-		- [Template1](#template1)
-		- [Template2](#template2)
+	
+	- [Template1](#template1)
+
+	- [Template2](#template2)
+
 	b. [UI Blocks](#ui-blocks)
-		- [MiniSidebar](#mini-sidebar)
-		- [MainSidebar](#main-sidebar)
-		- [Module data props](#module)
-		- [Profile](#profile)
-		- [Content](#content)
+	
+	- [MiniSidebar](#mini-sidebar)
+
+	- [MainSidebar](#main-sidebar)
+
+	- [Module data props](#module)
+
+	- [Profile](#profile)
+
+	- [Content](#content)
+
 	c. [Full example](#full-code-example)
+
 3. [Mention](#mention)
+
 	a. [MentionBox](#mentionbox)
+
 	b. [MentionContent](#mentioncontent)
+
 	c. [MentionText](#mentiontext)
+
 4. [Component API](#api)
 	
 
