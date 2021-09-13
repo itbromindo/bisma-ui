@@ -1,5 +1,4 @@
 import Editor from 'draft-js-plugins-editor'
-import 'draft-js-mention-plugin/lib/plugin.css'
 import React from "react"
 import PropTypes from 'prop-types'
 

@@ -1,9 +1,7 @@
 import React, { Component } from "react"
 import { convertToRaw } from "draft-js"
 import Editor from 'draft-js-plugins-editor'
-import createMentionPlugin, { defaultSuggestionsFilter } from 'draft-js-mention-plugin'
-import editorStyles from './assets/css/editorStyles.module.css'
-import 'draft-js-mention-plugin/lib/plugin.css'
+import createMentionPlugin, { defaultSuggestionsFilter } from '@draft-js-plugins/mention'
 import PropTypes from 'prop-types'
 
 class MentionBox extends Component {
@@ -16,6 +14,7 @@ class MentionBox extends Component {
     state = {
         reset: false,
         editorState: this.props.value,
+        suggestionOpen: false,
         suggestions: this.props.suggestionData
     }
 
@@ -48,13 +47,24 @@ class MentionBox extends Component {
 
         return (
             <div>
-                <div className={editorStyles.editor}>
+                <div style={{ 
+                    padding: '10px',
+                    border: '1px solid rgb(220 220 220)',
+                    ... this.props.style
+                 }}>
                     <Editor
                         plugins={plugins}
                         editorState={this.props.value}
                         onChange={this.onChange}
                     />
                     <MentionSuggestions
+                        open={this.state.suggestionOpen}
+                        onOpenChange={(val) => this.setState({
+                            suggestionOpen: val
+                        })}
+                        onAddMention={() => {
+                            // get the mention object selected
+                        }}
                         onSearchChange={this.onSearchChange}
                         suggestions={this.state.suggestions}
                     />
