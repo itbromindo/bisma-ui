@@ -37,15 +37,7 @@ Bisma-ui tersedia di npm dan dapat di install dengan perintah command line. Beri
 
 	c. [Full example](#full-code-example)
 
-3. [Mention](#mention)
-
-	a. [MentionBox](#mentionbox)
-
-	b. [MentionContent](#mentioncontent)
-
-	c. [MentionText](#mentiontext)
-
-4. [Component API](#api)
+3. [Component API](#api)
 	
 
 # Building Block
@@ -334,94 +326,6 @@ function App() {
 export default App;
 ```
 
-### Contoh MentionBox
-Contoh daftar data user yang akan digunakan sebagai acuan :
-```
-const mentions = [
-    {
-        name: 'Matthew Russell',
-        title: 'Senior Software Engineer',
-        avatar:
-            'https://pbs.twimg.com/profile_images/517863945/mattsailing_400x400.jpg',
-    },
-    {
-        name: 'Julian Krispel-Samsel',
-        title: 'United Kingdom',
-        avatar: 'https://avatars2.githubusercontent.com/u/1188186?v=3&s=400',
-    },
-    {
-        name: 'Jyoti Puri',
-        title: 'New Delhi, India',
-        avatar: 'https://avatars0.githubusercontent.com/u/2182307?v=3&s=400',
-    },
-    {
-        name: 'Max Stoiber',
-        title:
-            'Travels around the world, brews coffee, skis mountains and makes stuff on the web.',
-        avatar: 'https://avatars0.githubusercontent.com/u/7525670?s=200&v=4',
-    },
-    {
-        name: 'Nik Graf',
-        title: 'Passionate about Software Architecture, UX, Skiing & Triathlons',
-        avatar: 'https://avatars0.githubusercontent.com/u/223045?v=3&s=400',
-    },
-    {
-        name: 'Pascal Brandt',
-        title: 'HeathIT hacker and researcher',
-        avatar:
-            'https://pbs.twimg.com/profile_images/688487813025640448/E6O6I011_400x400.png',
-    },
-    {
-        name: 'Łukasz Bąk',
-        title: 'Randomly Generated User',
-        avatar: 'https://randomuser.me/api/portraits/men/36.jpg',
-    },
-];
-
-export default mentions;
-```
-
-Implementasi kode MentionBox dengan data diatas : 
-```
-<MentionBox 
-    data={mentions}
-    onChange={(raw, mentionedUser) => {
-      console.log('raw, mentionedUser', raw, mentionedUser)
-    }}
-/>
-```
-
-## Mention
-![Bisma-UI mentionbox](https://raw.githubusercontent.com/itbromindo/bisma-ui/main/docs/mentionbox.png)
-Mention merupakan fitur baru yang mendukung bidang input untuk melakukan mention ke user lain. 
-### MentionBox
-MentionBox adalah komponen input. Pada HTML regular, MentionBox dapat dikatakan sejenis tag `<input>`. Contoh :
-```
-<MentionBox
-	value={message}
-	suggestionData={mentions}
-	onChange={(editorState, mentionedUsers) => onMentionBoxChangeHandler(editorState, mentionedUsers)}
-/>
-```
-### MentionContent
-MentionContent berfungsi untuk menampilkan text yang di input melalui MentionBox.
-```
-let  msgListUI = []
-for (let  i = 0; i < messageList.length; i++) {
-	const  el = messageList[i];
-	msgListUI.push(
-		<MentionContent  key={i}  content={el}  />
-	)
-}
-
-return  msgListUI
-```
-### MentionText
-MentionText merupakan tipe data yang dihasilkan dari setiap pengisian MentionBox. Dalam skenario umum MentionText digunakan di state bersama MentionContent digunakan untuk menampilkan text hasil input di MentionBox.
-```
-const [message, setMessage] = useState(MentionText())
-```
-
 # API
 
 ## Template1
@@ -475,21 +379,3 @@ Wrapper / pembungkus mini sidebar dalam UI
 | children | Element UI yang akan ditampilkan  | `HTML/JSX`  | -  |
 
 
-## MentionBox
-Komponen untuk bidang input yang membutuhkan mention user lain
-
-| Property  | Deskripsi  | Tipe  | Default  |
-| ------------ | ------------ | ------------ | ------------ |
-| value  | Value pada input MentionBox  | `MentionText`  | -  |
-| suggestionData  | Daftar user yang digunakan sebagai sumber data untuk di filter ketika mention user  | `Array`  | -  |
-| onChange | Handle perubahan bidang input yang memiliki parameter raw data dan user yang di mention  | `Function(raw, mentionedUser)`  | -  |
-
-## MentionContent
-Wrapper / pembungkus mini sidebar dalam UI
-
-| Property  | Deskripsi  | Tipe  | Default  |
-| ------------ | ------------ | ------------ | ------------ |
-| content | Berisi data yang bersumber dari MentionBox akan ditampilkan | `MentionText`  | -  |
-
-## MentionText
-Tidak memiliki property
